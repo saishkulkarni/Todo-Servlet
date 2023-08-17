@@ -26,9 +26,13 @@ public class Login extends HttpServlet {
 			req.getRequestDispatcher("Login.html").include(req, resp);
 		} else {
 			if (user.getPassword().equals(password)) {
+				
+				//Setting session
 				req.getSession().setAttribute("user", user);
 				req.getSession().setMaxInactiveInterval(60);
+				
 				resp.getWriter().print("<h1 style='color:green'>Login Success</h1>");
+				//Carrying values to Home Page
 				req.setAttribute("list", user.getTasks());
 				req.getRequestDispatcher("Home.jsp").include(req, resp);
 			} else {

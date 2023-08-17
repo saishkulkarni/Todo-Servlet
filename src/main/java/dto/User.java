@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import lombok.Data;
-
+//Because hibernate we need object
 @Entity
 @Data
 public class User {
@@ -26,6 +26,7 @@ public class User {
 	LocalDate dob;
 	String address;
 
+	//Mapping
 	@OneToMany
 	List<Task> tasks;
 

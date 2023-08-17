@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Logout extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//Deleting Session
 		req.getSession().invalidate();
 		resp.getWriter().print("<h1 style='color:red'>Logout Success</h1>");
 		req.getRequestDispatcher("Login.html").include(req, resp);

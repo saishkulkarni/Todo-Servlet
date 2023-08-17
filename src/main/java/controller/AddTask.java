@@ -19,12 +19,12 @@ import dto.User;
 public class AddTask extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		//Session Validation
 		if (req.getSession().getAttribute("user") == null) {
 			resp.getWriter().print("<h1 style='color:red'>Session Expired, Login Again</h1>");
 			req.getRequestDispatcher("Login.html").include(req, resp);
 		} else {
-
+			
 			String name = req.getParameter("name");
 			String description = req.getParameter("description");
 			int days = Integer.parseInt(req.getParameter("days"));
@@ -46,6 +46,7 @@ public class AddTask extends HttpServlet {
 			dao.save(task);
 			dao.update(user);
 
+			//Session Validation
 			User user2 = dao.fetchByEmail(user.getEmail());
 
 			req.getSession().setAttribute("user", user2);

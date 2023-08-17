@@ -20,6 +20,7 @@ public class EditTask extends HttpServlet {
 		} else {
 			int id = Integer.parseInt(req.getParameter("id"));
 			UserDao dao = new UserDao();
+			//Carry Existing object
 			req.setAttribute("task", dao.fetchTask(id));
 			req.getRequestDispatcher("EditTask.jsp").forward(req, resp);
 		}

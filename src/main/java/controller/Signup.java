@@ -12,10 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import dao.UserDao;
 import dto.User;
 
+//URL Mapping
 @WebServlet("/signup")
+//Creating Servlet Class
 public class Signup extends HttpServlet {
 	@Override
+	//Since form we need to take doPost
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//To receive data from form/url - name attribute is case sensitive
 		String name = req.getParameter("name");
 		String email = req.getParameter("email");
 		String mobile = req.getParameter("mobile");
@@ -25,10 +29,11 @@ public class Signup extends HttpServlet {
 		String address = req.getParameter("address");
 
 		UserDao dao = new UserDao();
-
+		
+		//To check email should not repeat
 		User user = dao.fetchByEmail(email);
-
 		if (user == null) {
+			//loading object
 			user = new User();
 			user.setName(name);
 			user.setPassword(password);
@@ -37,7 +42,7 @@ public class Signup extends HttpServlet {
 			user.setEmail(email);
 			user.setGender(gender);
 			user.setMobile(Long.parseLong(mobile));
-
+			//persist
 			dao.save(user);
 
 			resp.getWriter().print("<h1 style='color:green'>Account Created Success</h1>");
